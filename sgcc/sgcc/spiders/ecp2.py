@@ -14,7 +14,7 @@ class Ecp2Spider(scrapy.Spider):
         ]
         data = {
             "index": 1,
-            "size": 20,
+            "size": 800,
             "firstPageMenuId": "2018060501171111",
             "orgId": "",
             "key": "",
@@ -28,9 +28,11 @@ class Ecp2Spider(scrapy.Spider):
             print('Data fetch error!')
             return
         
-        for note in data['resultValue']['noteList']:
-            print(note['publishOrgName'])
-            noteurl = "https://ecp.sgcc.com.cn/ecp2.0/portal/#/doc/{}/{}_2018060501171111".format(note['doctype'], note['noticeId'])
-            print(noteurl)
+        with open('notelist.json', 'w', encoding='utf-8') as jf:
+            json.dump(data, jf, ensure_ascii=False)
+        # for note in data['resultValue']['noteList']:
+        #     print(note['publishOrgName'])
+        #     noteurl = "https://ecp.sgcc.com.cn/ecp2.0/portal/#/doc/{}/{}_2018060501171111".format(note['doctype'], note['noticeId'])
+        #     print(noteurl)
         
         # print(data['resultValue']['noteList'][0]['publishOrgName'])
